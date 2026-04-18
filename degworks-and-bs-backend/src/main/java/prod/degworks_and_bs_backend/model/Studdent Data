@@ -1,0 +1,152 @@
+[
+  {
+    "enrollmentId": 1,
+    "emplid": 10001,
+    "courseCode": "CS101",
+    "credits": 3,
+    "grade": "A",
+    "semester": "Fall2024",
+    "professor": "Dr. Smith",
+    "complete": true
+  },
+  {
+    "enrollmentId": 2,
+    "emplid": 10002,
+    "courseCode": "MATH201",
+    "credits": 4,
+    "grade": "B+",
+    "semester": "Spring2025",
+    "professor": "Dr. Johnson",
+    "complete": true
+  },
+  {
+    "enrollmentId": 3,
+    "emplid": 10003,
+    "courseCode": "ENG150",
+    "credits": 3,
+    "grade": "A-",
+    "semester": "Fall2024",
+    "professor": "Prof. Williams",
+    "complete": true
+  },
+  {
+    "enrollmentId": 4,
+    "emplid": 10004,
+    "courseCode": "BIO110",
+    "credits": 4,
+    "grade": "B",
+    "semester": "Summer2025",
+    "professor": "Dr. Brown",
+    "complete": true
+  },
+  {
+    "enrollmentId": 5,
+    "emplid": 10005,
+    "courseCode": "CHEM101",
+    "credits": 4,
+    "grade": "C+",
+    "semester": "Fall2024",
+    "professor": "Dr. Davis",
+    "complete": true
+  },
+  {
+    "enrollmentId": 6,
+    "emplid": 10006,
+    "courseCode": "HIST210",
+    "credits": 3,
+    "grade": "B-",
+    "semester": "Spring2025",
+    "professor": "Dr. Miller",
+    "complete": true
+  },
+  {
+    "enrollmentId": 7,
+    "emplid": 10007,
+    "courseCode": "PSY101",
+    "credits": 3,
+    "grade": "A+",
+    "semester": "Fall2024",
+    "professor": "Dr. Wilson",
+    "complete": true
+  },
+  {
+    "enrollmentId": 8,
+    "emplid": 10008,
+    "courseCode": "ECON102",
+    "credits": 3,
+    "grade": "B",
+    "semester": "Spring2025",
+    "professor": "Dr. Moore",
+    "complete": true
+  },
+  {
+    "enrollmentId": 9,
+    "emplid": 10009,
+    "courseCode": "PHYS115",
+    "credits": 4,
+    "grade": "C",
+    "semester": "Fall2024",
+    "professor": "Dr. Taylor",
+    "complete": false
+  },
+  {
+    "enrollmentId": 10,
+    "emplid": 10010,
+    "courseCode": "ART100",
+    "credits": 2,
+    "grade": "A",
+    "semester": "Summer2025",
+    "professor": "Prof. Anderson",
+    "complete": true
+  },
+  {
+    "enrollmentId": 11,
+    "emplid": 10011,
+    "courseCode": "CS202",
+    "credits": 3,
+    "grade": "B+",
+    "semester": "Spring2025",
+    "professor": "Dr. Thomas",
+    "complete": true
+  },
+  {
+    "enrollmentId": 12,
+    "emplid": 10012,
+    "courseCode": "MATH310",
+    "credits": 4,
+    "grade": "A-",
+    "semester": "Fall2024",
+    "professor": "Dr. Jackson",
+    "complete": true
+  },
+  {
+    "enrollmentId": 13,
+    "emplid": 10013,
+    "courseCode": "SOC101",
+    "credits": 3,
+    "grade": "B",
+    "semester": "Spring2025",
+    "professor": "Dr. White",
+    "complete": true
+  },
+  {
+    "enrollmentId": 14,
+    "emplid": 10014,
+    "courseCode": "PHIL120",
+    "credits": 3,
+    "grade": "A",
+    "semester": "Fall2024",
+    "professor": "Dr. Harris",
+    "complete": true
+  },
+  {
+    "enrollmentId": 15,
+    "emplid": 10015,
+    "courseCode": "STAT200",
+    "credits": 3,
+    "grade": "B-",
+    "semester": "Spring2025",
+    "professor": "Dr. Martin",
+    "complete": false
+  }
+]
