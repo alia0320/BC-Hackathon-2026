@@ -2,7 +2,9 @@ package prod.degworks_and_bs_backend.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import prod.degworks_and_bs_backend.exception.ApiException;
 import prod.degworks_and_bs_backend.model.Course;
 import prod.degworks_and_bs_backend.model.Student;
 import prod.degworks_and_bs_backend.model.StudentEnrollment;
@@ -29,7 +31,7 @@ public class EnrollmentService {
 
             // 1. Student must exist
             if (!studentRepository.existsById(emplid)) {
-                throw new RuntimeException("Student not found");
+                throw new ApiException(HttpStatus.NOT_FOUND, "Student not found");
             }
 
             // 2. Prevent duplicate enrollment
@@ -38,7 +40,7 @@ public class EnrollmentService {
                     enrollment.getCourseCode(),
                     enrollment.getSemester()
             )) {
-                throw new RuntimeException("This enrollment already exists!");
+                throw new ApiException(HttpStatus.BAD_REQUEST, "This enrollment already exists");
             }
 
             // 3. Academic rules (there is no active checker for whether an equivalent course satisfies the prerequisite)
@@ -73,9 +75,7 @@ public class EnrollmentService {
                 GradeUtils.convertToPoints(previousCompleted.getGrade());
 
         if (gradePoints >= 2.0) {
-            throw new RuntimeException(
-                    "Enrollment denied: course already passed with grade "
-                            + previousCompleted.getGrade()
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Enrollment denied: already taken finished course with passing grade"
             );
         }
     }
@@ -84,7 +84,7 @@ public class EnrollmentService {
 
         // 1. Load course
         Course course = courseRepository.findById(courseCode)
-                .orElseThrow(() -> new RuntimeException("Course not found"));
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Course not found"));
 
         List<String> prerequisites = course.getPrerequisites();
 
@@ -106,8 +106,7 @@ public class EnrollmentService {
         // 5. Check each prerequisite
         for (String prereq : prerequisites) {
             if (!passedCourses.contains(prereq.toUpperCase())) {
-                throw new RuntimeException(
-                        "Enrollment denied: missing prerequisite " + prereq
+                throw new ApiException(HttpStatus.BAD_REQUEST, "Missing prerequisite: " + prereq
                 );
             }
         }
@@ -149,10 +148,7 @@ public class EnrollmentService {
                     GradeUtils.convertToPoints(previousAttempt.getGrade());
 
             if (previousGradePoints >= 2.0) {
-                throw new RuntimeException(
-                        "Retake not allowed: course already passed with grade "
-                                + previousAttempt.getGrade()
-                );
+                throw new ApiException(HttpStatus.BAD_REQUEST, "Enrollment denied: student already passed this course");
             }
         }
 
