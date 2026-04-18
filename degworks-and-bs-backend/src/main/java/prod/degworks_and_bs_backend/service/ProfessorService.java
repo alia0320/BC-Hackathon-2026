@@ -2,7 +2,9 @@ package prod.degworks_and_bs_backend.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import prod.degworks_and_bs_backend.exception.ApiException;
 import prod.degworks_and_bs_backend.model.Professor;
 import prod.degworks_and_bs_backend.model.ProfessorReview;
 import prod.degworks_and_bs_backend.repository.ProfessorRepository;
@@ -26,7 +28,7 @@ public class ProfessorService {
     // Used internally
     public Professor getProfessorById(Integer profId) {
         return professorRepository.findById(profId)
-                .orElseThrow(() -> new RuntimeException("Professor not found"));
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,"Professor not found"));
     }
 
     // Update professor rating by averaging all review scores
@@ -63,11 +65,11 @@ public class ProfessorService {
     public void deleteProfessor(Integer profId) {
 
         Professor professor = professorRepository.findById(profId)
-                .orElseThrow(() -> new RuntimeException("Professor not found"));
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,"Professor not found"));
 
         // Block deletion if reviews exist
         if (reviewsRepository.existsByProfessorId(profId)) {
-            throw new RuntimeException(
+            throw new ApiException(HttpStatus.BAD_REQUEST,
                     "Cannot delete professor with existing reviews"
             );
         }
@@ -78,7 +80,7 @@ public class ProfessorService {
     // for admin
     public Professor hideProfessor(Integer profId) {
         Professor professor = professorRepository.findById(profId)
-                .orElseThrow(() -> new RuntimeException("Professor not found"));
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,"Professor not found"));
 
         professor.setActive(false);
         return professorRepository.save(professor);

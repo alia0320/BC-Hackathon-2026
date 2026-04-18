@@ -1,8 +1,10 @@
 package prod.degworks_and_bs_backend.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import prod.degworks_and_bs_backend.exception.ApiException;
 import prod.degworks_and_bs_backend.model.Professor;
 import prod.degworks_and_bs_backend.model.ProfessorReview;
 import prod.degworks_and_bs_backend.repository.ProfessorReviewsRepository;
@@ -24,7 +26,7 @@ public class ProfessorReviewService {
                 professorService.getProfessorById(review.getProfessorId());
 
         if (!professor.isActive()) {
-            throw new RuntimeException("Cannot review an inactive professor");
+            throw new ApiException(HttpStatus.BAD_REQUEST,"Cannot review an inactive professor");
         }
 
         ProfessorReview saved = reviewRepository.save(review);
@@ -40,7 +42,7 @@ public class ProfessorReviewService {
 
     public ProfessorReview getReview(Integer id) {
         return reviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Review not found"));
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,"Review not found"));
     }
 
 

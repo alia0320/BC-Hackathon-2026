@@ -2,7 +2,9 @@ package prod.degworks_and_bs_backend.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import prod.degworks_and_bs_backend.exception.ApiException;
 import prod.degworks_and_bs_backend.model.Requirement;
 import prod.degworks_and_bs_backend.repository.CourseRepository;
 import prod.degworks_and_bs_backend.repository.RequirementRepository;
@@ -26,7 +28,7 @@ public class RequirementService {
         requirement.setCode(requirement.getCode().toUpperCase());
 
         if (requirementRepository.existsByCodeIgnoreCase(requirement.getCode())) {
-            throw new RuntimeException(
+            throw new ApiException(HttpStatus.BAD_REQUEST,
                     "Requirement with code already exists: " + requirement.getCode()
             );
         }
@@ -40,12 +42,12 @@ public class RequirementService {
 
     public Requirement getRequirementById(Integer id) {
         return requirementRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Requirement not found"));
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,"Requirement not found"));
     }
 
     public Requirement getRequirementByCode(String code) {
         return requirementRepository.findByCodeIgnoreCase(code)
-                .orElseThrow(() -> new RuntimeException("Requirement not found"));
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,"Requirement not found"));
     }
 
     public List<Requirement> getActiveRequirements() {
@@ -65,7 +67,7 @@ public class RequirementService {
 
         Requirement existing = getRequirementById(id);
         if(existing == null) {
-            throw new RuntimeException("Cannot find requirement");
+            throw new ApiException(HttpStatus.NOT_FOUND,"Cannot find requirement");
         }
 
         // Code is immutable
@@ -85,7 +87,7 @@ public class RequirementService {
         Requirement requirement = getRequirementById(id);
 
         if (requirement == null) {
-            throw new RuntimeException("Cannot find requirement");
+            throw new ApiException(HttpStatus.NOT_FOUND,"Cannot find requirement");
         }
         requirement.setActive(false);
         return requirementRepository.save(requirement);
@@ -94,7 +96,7 @@ public class RequirementService {
     public Requirement restoreRequirement(Integer id) {
         Requirement requirement = getRequirementById(id);
         if (requirement == null) {
-            throw new RuntimeException("Cannot find requirement");
+            throw new ApiException(HttpStatus.NOT_FOUND,"Cannot find requirement");
         }
         requirement.setActive(true);
         return requirementRepository.save(requirement);
@@ -109,7 +111,7 @@ public class RequirementService {
         Requirement requirement = getRequirementById(id);
 
         if (courseRepository.existsBySatisfiesContaining(requirement)) {
-            throw new RuntimeException(
+            throw new ApiException(HttpStatus.BAD_REQUEST,
                     "Cannot delete requirement that is assigned to courses"
             );
         }

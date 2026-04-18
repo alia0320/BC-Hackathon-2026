@@ -2,7 +2,9 @@ package prod.degworks_and_bs_backend.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import prod.degworks_and_bs_backend.exception.ApiException;
 import prod.degworks_and_bs_backend.model.Student;
 import prod.degworks_and_bs_backend.model.StudentEnrollment;
 import prod.degworks_and_bs_backend.repository.StudentEnrollmentRepository;
@@ -53,7 +55,7 @@ public class StudentService {
     // Update GPA based on completed enrollments
     public Student updateGPA(Integer emplid) {
         Student student = studentRepository.findById(emplid)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,"Student not found"));
 
         List<StudentEnrollment> completedCourses =
                 studentEnrollmentRepository.findByEmplidAndCompleted(emplid, true);

@@ -3,7 +3,9 @@ package prod.degworks_and_bs_backend.service;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import prod.degworks_and_bs_backend.exception.ApiException;
 import prod.degworks_and_bs_backend.model.Course;
 import prod.degworks_and_bs_backend.repository.CourseRepository;
 import org.springframework.data.domain.Pageable;
@@ -92,27 +94,27 @@ public class CourseService {
         for (String prereq : prerequisites) {
 
             if (prereq == null || prereq.isBlank()) {
-                throw new RuntimeException("Prerequisite course code cannot be blank");
+                throw new ApiException(HttpStatus.BAD_REQUEST, "Prerequisite course code cannot be empty");
             }
 
             String prereqCode = prereq.toUpperCase();
 
             if (!seen.add(prereqCode)) {
-                throw new RuntimeException(
+                throw new ApiException(HttpStatus.BAD_REQUEST,
                         "Duplicate prerequisite detected: " + prereqCode
                 );
             }
 
             // 2. Course cannot be its own prerequisite
             if (courseCode.equals(prereqCode)) {
-                throw new RuntimeException(
+                throw new ApiException(HttpStatus.BAD_REQUEST,
                         "Course cannot list itself as a prerequisite"
                 );
             }
 
             // 3. Prerequisite must exist
             if (!courseRepository.existsById(prereqCode)) {
-                throw new RuntimeException(
+                throw new ApiException(HttpStatus.BAD_REQUEST,
                         "Prerequisite course does not exist: " + prereqCode
                 );
             }
@@ -127,9 +129,7 @@ public class CourseService {
         }
 
         if (courseRepository.existsByPrerequisitesContaining(id)) {
-            throw new RuntimeException(
-                    "Cannot delete course used as a prerequisite"
-            );
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Cannot delete course as it is a prerequisite for another course");
         }
 
         courseRepository.deleteById(id);
