@@ -23,4 +23,6 @@ public interface StudentEnrollmentRepository extends JpaRepository<StudentEnroll
     Optional<StudentEnrollment> findByEmplidAndCourseCodeAndSemester(Integer emplid, String courseCode, String semester);
 
     List<StudentEnrollment> findByEmplidAndCourseCodeAndCompleted(Integer emplid, String courseCode, boolean completed);
+
+    List<StudentEnrollment> findAllById(Iterable<Integer> ids);
 }
