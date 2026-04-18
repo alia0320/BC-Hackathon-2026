@@ -3,7 +3,10 @@ package prod.degworks_and_bs_backend.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 @Data
 public class StudentCreateRequest {
