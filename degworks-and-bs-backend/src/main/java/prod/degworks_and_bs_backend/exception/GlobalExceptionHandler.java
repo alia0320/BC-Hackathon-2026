@@ -33,9 +33,11 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleException(Exception ex) {
+        ex.printStackTrace(); // 🔥 CRITICAL
+
         return buildResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR,
-                "An unexpected error occurred"
+                ex.getMessage()
         );
     }
 

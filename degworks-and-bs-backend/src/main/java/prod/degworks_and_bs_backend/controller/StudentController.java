@@ -34,6 +34,9 @@ public class StudentController {
         student.setSchoolEmail(request.getSchoolEmail());
         student.setPassword(request.getPassword());
 
+        student.setGpa(0.0);
+        student.setCredits(0);
+
         Student saved = studentService.saveStudent(student);
         return ResponseEntity.ok(toResponse(saved));
     }
@@ -92,7 +95,7 @@ public class StudentController {
         return new StudentResponse(
                 student.getEmplid(),
                 student.getName(),
-                student.getGPA(),
+                student.getGpa(),
                 student.getCredits()
         );
     }

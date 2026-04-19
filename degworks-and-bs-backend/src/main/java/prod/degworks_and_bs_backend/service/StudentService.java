@@ -61,7 +61,7 @@ public class StudentService {
                 studentEnrollmentRepository.findByEmplidAndCompleted(emplid, true);
 
         if (completedCourses.isEmpty()) {
-            student.setGPA(0);
+            student.setGpa(0);
             return studentRepository.save(student);
         }
 
@@ -74,7 +74,7 @@ public class StudentService {
             totalCredits += e.getCredits();
         }
 
-        student.setGPA(totalQualityPoints / totalCredits);
+        student.setGpa(totalQualityPoints / totalCredits);
         student.setCredits(totalCredits);
 
         return studentRepository.save(student);

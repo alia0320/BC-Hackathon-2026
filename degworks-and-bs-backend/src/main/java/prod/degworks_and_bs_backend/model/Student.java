@@ -1,6 +1,6 @@
 package prod.degworks_and_bs_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,8 +8,6 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Table(name = "students")
@@ -22,10 +20,10 @@ public class Student {
     private Integer emplid;
 
     @Column(nullable = false)
-    private double GPA = 0;
+    private double gpa = 0;
 
     @Column(nullable = false)
-    private int credits;
+    private int credits = 0;
 
     @Size(max = 100, message = "50 Max Character Limit")
     @Column (nullable = false, length = 50)
@@ -33,10 +31,10 @@ public class Student {
 
     @NotBlank
     @Email(regexp = ".+@stu-mail\\.brooklyn\\.cuny\\.edu")
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String schoolEmail;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
 

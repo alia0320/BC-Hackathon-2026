@@ -12,9 +12,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 // 🔥 disable CSRF for H2
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/h2-console/**")
-                )
+                .csrf(csrf -> csrf.disable())
 
                 // 🔥 allow H2 console
                 .authorizeHttpRequests(auth -> auth

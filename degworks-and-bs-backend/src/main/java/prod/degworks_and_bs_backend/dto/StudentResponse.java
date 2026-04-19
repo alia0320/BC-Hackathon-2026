@@ -4,15 +4,18 @@ public class StudentResponse {
 
     private Integer emplid;
     private String name;
-    private double GPA;
+    private double gpa;   // ✅ lowercase
     private int credits;
 
-    public StudentResponse(Integer emplid, String name, double GPA, int credits) {
+    public StudentResponse(Integer emplid, String name, double gpa, int credits) {
         this.emplid = emplid;
         this.name = name;
-        this.GPA = GPA;
+        this.gpa = gpa;
         this.credits = credits;
     }
 
-    // getters only (no setters)
+    public Integer getEmplid() { return emplid; }
+    public String getName() { return name; }
+    public double getGpa() { return gpa; }   // ✅ standard getter
+    public int getCredits() { return credits; }
 }
