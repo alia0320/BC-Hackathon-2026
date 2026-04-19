@@ -1,6 +1,6 @@
-INSERT INTO requirements (id, code, name, required_credits, active) VALUES
-                                                                        (1, 'CS_CORE', 'Computer Science Core', 30, true),
-                                                                        (2, 'MATH_CORE', 'Mathematics Core', 15, true);
+INSERT INTO requirements (code, name, required_credits, active) VALUES
+                                                                        ('CS_CORE', 'Computer Science Core', 30, true),
+                                                                        ('MATH_CORE', 'Mathematics Core', 15, true);
 
 INSERT INTO courses (code, title, credits) VALUES
                                                ('CS101', 'Introduction to Computer Science', 3),
@@ -15,9 +15,9 @@ INSERT INTO course_requirements (course_code, requirement_id) VALUES
                                                                   ('CS102', 1),
                                                                   ('MATH101', 2);
 
-INSERT INTO professors (prof_id, name, rating, department, active) VALUES
-                                                                       (1, 'Dr. Smith', 0.0, 'Computer Science', true),
-                                                                       (2, 'Dr. Johnson', 0.0, 'Mathematics', true);
+INSERT INTO professors (name, rating, department, active) VALUES
+                                                                       ('Dr. Smith', 0.0, 'Computer Science', true),
+                                                                       ('Dr. Johnson', 0.0, 'Mathematics', true);
 
 
 INSERT INTO students (emplid, gpa, credits, name, school_email, password) VALUES
