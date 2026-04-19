@@ -2,7 +2,7 @@
 
 # 🎓 DegreeFlow — Academic Tracking System
 
-A full-stack academic tracking platform that unifies **degree auditing**, **course management**, and **professor insights** into one seamless experience.
+A full-stack protoype academic tracking platform that brings together **degree auditing**, **course management**, and **professor insights** into one seamless experience.
 
 DegreeFlow combines the functionality of DegreeWorks, Brightspace, and RateMyProfessor into a single modern application—helping students track progress, plan semesters, and make smarter academic decisions.
 
