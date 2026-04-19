@@ -46,16 +46,18 @@ public class ProfessorReview {
     private Integer unhelpful = 0;
 
     @Column(nullable = false)
-    private LocalDateTime reviewTime; // time the review was made
+    private LocalDateTime reviewTime;
 
     @PrePersist
-    public void setTime() {
+    public void onPrePersist() {
         reviewTime = LocalDateTime.now();
+        if (courseCode != null) {
+            courseCode = courseCode.toUpperCase();
+        }
     }
 
-    @PrePersist
     @PreUpdate
-    public void normalize() {
+    public void onPreUpdate() {
         if (courseCode != null) {
             courseCode = courseCode.toUpperCase();
         }

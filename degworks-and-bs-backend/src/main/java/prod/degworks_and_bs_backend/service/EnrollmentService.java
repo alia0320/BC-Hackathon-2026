@@ -12,7 +12,6 @@ import prod.degworks_and_bs_backend.repository.CourseRepository;
 import prod.degworks_and_bs_backend.repository.StudentEnrollmentRepository;
 import prod.degworks_and_bs_backend.repository.StudentRepository;
 
-import javax.print.attribute.IntegerSyntax;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;

@@ -28,7 +28,6 @@ public class StudentEnrollment {
     @Column(nullable = false)
     private Integer credits;
 
-    @NotBlank(message = "Grade cannot be blank!")
     @Size(max = 2, message = "Must be a letter grade! i.e. \"A+\" or \"C\"")
     @Column(nullable = true)
     private String grade;

@@ -2,6 +2,10 @@ package prod.degworks_and_bs_backend.service;
 
 public class GradeUtils {
     public static double convertToPoints(String grade) {
+        if (grade == null) {
+            return 0.0; // or throw controlled exception
+        }
+
         return switch (grade.toUpperCase()) {
             case "A+", "A" -> 4.0;
             case "A-" -> 3.7;
