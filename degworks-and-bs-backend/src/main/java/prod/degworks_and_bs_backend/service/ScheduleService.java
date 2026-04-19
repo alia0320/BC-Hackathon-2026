@@ -31,7 +31,7 @@ public class ScheduleService {
         String normalizedSemester = semester.trim();
 
         if (scheduleRepository.existsByEmplidAndSemester(emplid, normalizedSemester)) {
-            throw new RuntimeException(
+            throw new ApiException(HttpStatus.BAD_REQUEST,
                     "Schedule already exists for student " + emplid +
                             " in semester " + normalizedSemester
             );

@@ -58,7 +58,7 @@ public class EnrollmentController {
      */
     @PutMapping("/{enrollmentId}/grade")
     public ResponseEntity<StudentEnrollment> updateGrade(
-            @PathVariable String enrollmentId,
+            @PathVariable Integer enrollmentId,
             @RequestParam String grade
     ) {
         return ResponseEntity.ok(
@@ -91,7 +91,7 @@ public class EnrollmentController {
      */
     @DeleteMapping("/{enrollmentId}")
     public ResponseEntity<Void> deleteEnrollment(
-            @PathVariable String enrollmentId
+            @PathVariable Integer enrollmentId
     ) {
         enrollmentService.deleteEnrollment(enrollmentId);
         return ResponseEntity.noContent().build();

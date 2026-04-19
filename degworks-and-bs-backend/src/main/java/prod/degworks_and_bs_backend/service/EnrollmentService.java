@@ -12,6 +12,7 @@ import prod.degworks_and_bs_backend.repository.CourseRepository;
 import prod.degworks_and_bs_backend.repository.StudentEnrollmentRepository;
 import prod.degworks_and_bs_backend.repository.StudentRepository;
 
+import javax.print.attribute.IntegerSyntax;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -119,9 +120,9 @@ public class EnrollmentService {
     }
 
     // Update grade for a specific enrollment (admin)
-    public StudentEnrollment updateGrade(String enrollmentId, String newGrade) {
+    public StudentEnrollment updateGrade(Integer enrollmentId, String newGrade) {
         StudentEnrollment enrollment = enrollmentRepository.findById(enrollmentId)
-                .orElseThrow(() -> new RuntimeException("Enrollment not found"));
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,"Enrollment not found"));
 
         enrollment.setGrade(newGrade);
         return enrollmentRepository.save(enrollment);
@@ -132,7 +133,7 @@ public class EnrollmentService {
         // 1. Get current enrollment
         StudentEnrollment enrollment = enrollmentRepository
                 .findByEmplidAndCourseCodeAndSemester(emplid, courseCode, semester)
-                .orElseThrow(() -> new RuntimeException("Enrollment not found"));
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,"Enrollment not found"));
 
         // 2. Find existing completed attempt (if any)
         StudentEnrollment previousAttempt =
@@ -171,7 +172,7 @@ public class EnrollmentService {
 
 
     // Delete an enrollment (admin)
-    public void deleteEnrollment(String enrollmentId) {
+    public void deleteEnrollment(Integer enrollmentId) {
         enrollmentRepository.deleteById(enrollmentId);
     }
 

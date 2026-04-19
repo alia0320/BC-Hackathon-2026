@@ -52,4 +52,12 @@ public class ProfessorReview {
     public void setTime() {
         reviewTime = LocalDateTime.now();
     }
+
+    @PrePersist
+    @PreUpdate
+    public void normalize() {
+        if (courseCode != null) {
+            courseCode = courseCode.toUpperCase();
+        }
+    }
 }

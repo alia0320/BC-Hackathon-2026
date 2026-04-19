@@ -39,4 +39,10 @@ public class Course {
             inverseJoinColumns = @JoinColumn(name = "requirement_id")
     )
     private List<Requirement> satisfies;
+
+    @PrePersist
+    @PreUpdate
+    public void normalize() {
+        this.code = this.code.toUpperCase();
+    }
 }

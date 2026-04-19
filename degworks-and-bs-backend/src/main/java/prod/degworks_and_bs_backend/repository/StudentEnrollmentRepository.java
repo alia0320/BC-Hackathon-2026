@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface StudentEnrollmentRepository extends JpaRepository<StudentEnrollment, String> {
+public interface StudentEnrollmentRepository extends JpaRepository<StudentEnrollment, Integer> {
 
     List<StudentEnrollment> findByEmplid(Integer emplid);
 
@@ -24,5 +24,5 @@ public interface StudentEnrollmentRepository extends JpaRepository<StudentEnroll
 
     List<StudentEnrollment> findByEmplidAndCourseCodeAndCompleted(Integer emplid, String courseCode, boolean completed);
 
-    List<StudentEnrollment> findAllById(Iterable<Integer> ids);
+
 }

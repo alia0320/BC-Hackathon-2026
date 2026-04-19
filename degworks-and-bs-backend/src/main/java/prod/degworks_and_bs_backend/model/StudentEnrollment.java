@@ -45,4 +45,15 @@ public class StudentEnrollment {
     @Column(nullable = true)
     private boolean completed; // another way of figuring whether a student has completed their enrollment
 
+    @PrePersist
+    @PreUpdate
+    public void normalize() {
+        if (courseCode != null) {
+            courseCode = courseCode.toUpperCase();
+        }
+
+        if (semester != null) {
+            semester = semester.trim();
+        }
+    }
 }
